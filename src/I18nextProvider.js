@@ -2,6 +2,11 @@ import { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 
 class I18nextProvider extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.i18n !== nextProps.i18n) {
+      throw new Error('[react-i18next][I18nextProvider]does not support changing the i18n object.');
+    }
+  }
   constructor(props, context) {
     super(props, context);
     this.i18n = props.i18n;
@@ -16,12 +21,6 @@ class I18nextProvider extends Component {
 
   getChildContext() {
     return { i18n: this.i18n };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.i18n !== nextProps.i18n) {
-      throw new Error('[react-i18next][I18nextProvider]does not support changing the i18n object.');
-    }
   }
 
   render() {
