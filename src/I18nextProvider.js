@@ -18,7 +18,7 @@ class I18nextProvider extends Component {
     return { i18n: this.i18n };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.i18n !== nextProps.i18n) {
       throw new Error('[react-i18next][I18nextProvider]does not support changing the i18n object.');
     }
